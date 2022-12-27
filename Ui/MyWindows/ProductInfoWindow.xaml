@@ -1,0 +1,32 @@
+﻿<Window x:Class="InvoiceAssistant.Ui.MyWindows.ProductInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InvoiceAssistant.Ui.MyWindows"
+        mc:Ignorable="d"
+        Title="商品信息" Height="450" Width="800" Loaded="Window_Loaded"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <CollectionViewSource x:Key="productViewSource"/>
+    </Window.Resources>
+    <Grid>
+        <DataGrid x:Name="productDataGrid" AutoGenerateColumns="False" 
+          EnableRowVirtualization="True" 
+          ItemsSource="{Binding Source={StaticResource productViewSource}}" 
+          IsReadOnly="True" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding ProductId}"
+                            Header="商品编码" Width="SizeToHeader"
+                            />
+            <DataGridTextColumn Binding="{Binding Name}" Header="商品名称" 
+                            Width="*"/>
+            <DataGridTextColumn Binding="{Binding TaxCode.Name}" Header="简名"
+                            Width="*"/>
+                <DataGridTextColumn Binding="{Binding TaxCode.Code}" Header="税收分类编码" 
+                            Width="*"/>
+            </DataGrid.Columns>
+    </DataGrid>
+
+    </Grid>
+</Window>

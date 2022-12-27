@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="InvoiceAssistant.Ui.MyControls.ImportTaxCodeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:local="clr-namespace:InvoiceAssistant.Ui.MyControls" 
+             xmlns:viewmodel="clr-namespace:InvoiceAssistant.Logic.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ImportTaxCodeViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+            <DockPanel  LastChildFill="False">
+                <TextBlock DockPanel.Dock="Left" Text="·批量导入" FontSize="18" Margin="5 0 0 0"/>
+                <Button DockPanel.Dock="Right"   Style="{StaticResource MaterialDesignFlatButton}" 
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                    Padding="0">
+                    <Button.CommandParameter>
+                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                            False
+                        </system:Boolean>
+                    </Button.CommandParameter>
+                    <materialDesign:PackIcon 
+                    Kind="Close" 
+                    Width="{Binding Width, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" 
+                    Height="{Binding Height, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" 
+                                         />
+                </Button>
+            </DockPanel>
+            <Separator />
+            <StackPanel Orientation="Horizontal" Margin="20 20 20 0">
+
+                <TextBlock Text="1.还没创建过数据文件,"  VerticalAlignment="Center"/>
+                <Button Content="下载模板" Style="{StaticResource MaterialDesignFlatLightButton}" Padding="0" FontSize="14"
+                    Command="{Binding DownloadModelCommand}"/>
+            </StackPanel>
+            <TextBlock Text="2.已创建好数据文件，直接导入："  VerticalAlignment="Center" Margin="20 0"/>
+
+            <CheckBox Content="更新已存在的商品" Foreground="Gray" Margin="20" IsChecked="{Binding AllowUpdate}"/>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock  materialDesign:HintAssist.Hint="选择导入的文件" 
+                              Text="{Binding FileName}"  Width="90" TextTrimming="WordEllipsis" d:Text="11111111111111111111111111111111"
+                              VerticalAlignment="Center" Margin="2" Foreground="Gray" ToolTip="{Binding FileName}"
+                              />
+                        <Separator >
+                            <Separator.LayoutTransform >
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="90"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Separator.LayoutTransform>
+                        </Separator>
+                        <Button
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        Content="选择文件" Command="{Binding ChoiceFileCommand}"
+                        />
+                    </StackPanel>
+                </Border>
+                <Button Content="上传"   Margin="10 0 0 0" VerticalAlignment="Stretch"  Command="{Binding UploadCommand}"/>
+            </StackPanel>
+            <GroupBox Header="错误信息" Style="{x:Null}" Foreground="Red" Height="100">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding ErrorMessages}" Padding="0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" Margin="3"
+                                       MaxWidth="200"
+                                       TextWrapping="WrapWithOverflow"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

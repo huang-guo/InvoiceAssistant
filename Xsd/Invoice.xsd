@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="GB18030" ?>
+<xs:schema id="XMLSchema1"
+    targetNamespace="http://tempuri.org/XMLSchema1.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XMLSchema1.xsd"
+    xmlns:mstns="http://tempuri.org/XMLSchema1.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+	<xs:element name="Kp">
+		<xs:complexType>
+			<xs:sequence >
+				<xs:element name="Version" default="2.0" type="xs:string"/>
+				<xs:element name="Fpxx">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Zsl" type="xs:int"/>
+							<xs:element name="Fpsj">
+								<xs:complexType>
+									<xs:sequence maxOccurs="unbounded">
+										<xs:element name="Fp">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Djh" type="xs:positiveInteger" default="1"/>
+													<xs:element name="Gfmc" type="xs:string" default="" />
+													<xs:element name="Gfsh"  type="xs:string" default=""/>
+													<xs:element name="Gfyhzh"  type="xs:string" default=""/>
+													<xs:element name="Gfdzdh"  type="xs:string" default=""/>
+													<xs:element name="Bz"  type="xs:string" default=""/>
+													<xs:element name="Fhr"  type="xs:string" default=""/>
+													<xs:element name="Skr"  type="xs:string" default=""/>
+													<xs:element name="Spbmbbh"  type="xs:string" default="40.0"/>
+													<xs:element name="Hsbz"  type="xs:positiveInteger" default="1"/>
+													<xs:element name="Spxx" >
+														<xs:complexType>
+															<xs:sequence maxOccurs="unbounded">
+																<xs:element name="Sph">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="Xh" default="1" type="xs:int"/>	
+																			<xs:element name="Spmc" type="xs:string"/>	
+																			<xs:element name="Ggxh" type="xs:string" default=""/>	
+																			<xs:element name="Jldw" type="xs:string" default=""/>	
+																			<xs:element name="Spbm" type="xs:string"/>	
+																			<xs:element name="Qyspbm" type="xs:string" default=""/>	
+																			<xs:element name="Syyhzcbz" type="xs:string" default="0" />	
+																			<xs:element name="Lslbz" type="xs:string" default="" />	
+																			<xs:element name="Yhzcsm" type="xs:string" default="" />	
+																			<xs:element name="Dj" type="xs:double"  />	
+																			<xs:element name="Sl" type="xs:double"  />	
+																			<xs:element name="Je" type="xs:double"  />	
+																			<xs:element name="Slv" type="xs:double"  />	
+																			<xs:element name="Se" type="xs:double"  />	
+																			<xs:element name="Kce" type="xs:double" default="0" />	
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+			
+	</xs:element>
+</xs:schema>
