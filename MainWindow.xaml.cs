@@ -4,7 +4,6 @@ using InvoiceAssistant.Ui.MyWindows;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
-using NLog.Targets.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

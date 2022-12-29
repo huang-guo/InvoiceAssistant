@@ -193,12 +193,12 @@ namespace InvoiceAssistant.Logic.ViewModel
             InitColumns();
         }
 
-        public  async Task<KpFpxxFpsjFP?> GetInvoice()
+        public KpFpxxFpsjFP? GetInvoice()
         {
             ValidateAllProperties();
             if (!HasErrors)
             {
-                if (productNameColumn!=null&&countColumn!=null)
+                if (productNameColumn != null && countColumn != null)
                 {
                     List<KpFpxxFpsjFPSpxxSph> sphs = new(); //商品行
                     List<KpFpxxFpsjFPSpxxSph> discountLine = new(); //折扣行
@@ -215,15 +215,15 @@ namespace InvoiceAssistant.Logic.ViewModel
                         double count = (double)row[countColumn];
                         double price;
                         double amount;
-                        if (priceColumn==null&&amountColumn!=null)
+                        if (priceColumn == null && amountColumn != null)
                         {
-                            amount= (double)row[amountColumn];
+                            amount = (double)row[amountColumn];
                             price = amount / count;
                         }
-                        else if (priceColumn!=null)
+                        else if (priceColumn != null)
                         {
                             price = (double)row[priceColumn];
-                            amount= price * count;
+                            amount = price * count;
                         }
                         else
                         {
@@ -250,7 +250,7 @@ namespace InvoiceAssistant.Logic.ViewModel
                             }
                             KpFpxxFpsjFPSpxxSph spxxSph = new()
                             {
-                                Xh = excelData.Rows.IndexOf(row)+1,
+                                Xh = excelData.Rows.IndexOf(row) + 1,
                                 Spmc = isFullName ? name : tax.Name,
                                 Spbm = tax.Code,
                                 Ggxh = modelColumn != null ? row[modelColumn].ToString() : "",
@@ -260,8 +260,8 @@ namespace InvoiceAssistant.Logic.ViewModel
                                 Sl = count,
                                 Je = amount / (1 + taxRate),
                                 Se = amount * taxRate / (1 + taxRate),
-                                
-                                Lslbz=IsZeroTaxRate?zeroTaxRateSelected.ToString(): "",
+
+                                Lslbz = IsZeroTaxRate ? zeroTaxRateSelected.ToString() : "",
                             };
                             if (count < 0)
                             {
@@ -278,28 +278,29 @@ namespace InvoiceAssistant.Logic.ViewModel
                     // 添加折扣行
                     foreach (KpFpxxFpsjFPSpxxSph item in discountLine)
                     {
-                        int index=sphs.FindIndex(x=>x.Spmc==item.Spmc&&x.Je+ item.Je>=0);
-                        if (index<0)
+                        int index = sphs.FindIndex(x => x.Spmc == item.Spmc && x.Je + item.Je >= 0);
+                        if (index < 0)
                         {
                             Log.Error($"找不到'{_title}'中第{item.Xh}行抵扣行对应的商品行");
                             return null;
                         }
                         else
                         {
-                            sphs.Insert(index+1,item);
+                            sphs.Insert(index + 1, item);
                         }
                     }
-                    return new KpFpxxFpsjFP() {
-                        Bz=remarks ?? "",
-                        Gfyhzh=bankAccount ?? "",
-                        Gfdzdh=addressPhone??"",
-                        Gfsh=taxID??"",
-                        Gfmc=buyer ?? "",
-                        Skr=Properties.Settings.Default.InvoicePayee,
-                        Fhr=Properties.Settings.Default.InvoiceReviewer,
-                        Spbmbbh=Properties.Settings.Default.InvoiceVersion,
-                        Spxx=new KpFpxxFpsjFPSpxx() { Sph=sphs.ToArray()},
-                        
+                    return new KpFpxxFpsjFP()
+                    {
+                        Bz = remarks ?? "",
+                        Gfyhzh = bankAccount ?? "",
+                        Gfdzdh = addressPhone ?? "",
+                        Gfsh = taxID ?? "",
+                        Gfmc = buyer ?? "",
+                        Skr = Properties.Settings.Default.InvoicePayee,
+                        Fhr = Properties.Settings.Default.InvoiceReviewer,
+                        Spbmbbh = Properties.Settings.Default.InvoiceVersion,
+                        Spxx = new KpFpxxFpsjFPSpxx() { Sph = sphs.ToArray() },
+
                     };
                 }
             }

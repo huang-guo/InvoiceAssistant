@@ -29,17 +29,17 @@ namespace InvoiceAssistant.Logic.ViewModel
         private bool isOpenDialog;
 
         [ObservableProperty]
-        private InvoiceItemViewModel _selecteItem;
+        private InvoiceItemViewModel? _selecteItem;
 
         [RelayCommand]
-        public async void GennerateInvoicFile()
+        public  void GennerateInvoicFile()
         {
             List<KpFpxxFpsjFP> invoices = new(); // 发票数据列表
             List<InvoiceItemViewModel> remove_list = new();
             foreach (InvoiceItemViewModel item in _items)
             {
-                Task<KpFpxxFpsjFP?> task = item.GetInvoice();
-                var fP = await task;
+                var fP = item.GetInvoice();
+                
                 if (fP!=null)
                 {
                     fP.Djh = (_items.IndexOf(item) + 1).ToString();

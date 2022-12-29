@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceAssistant", "InvoiceAssistant.csproj", "{571B858F-E6C7-4C52-A3C9-66A9A11E475F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceAssistant", "InvoiceAssistant.csproj", "{571B858F-E6C7-4C52-A3C9-66A9A11E475F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InvoiceAssistantSetup", "..\InvoiceAssistantSetup\InvoiceAssistantSetup.vdproj", "{67966C73-83DA-4390-A6CE-0AE7390381DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{571B858F-E6C7-4C52-A3C9-66A9A11E475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{571B858F-E6C7-4C52-A3C9-66A9A11E475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{571B858F-E6C7-4C52-A3C9-66A9A11E475F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67966C73-83DA-4390-A6CE-0AE7390381DB}.Debug|Any CPU.ActiveCfg = Debug
+		{67966C73-83DA-4390-A6CE-0AE7390381DB}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
