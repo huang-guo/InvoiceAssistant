@@ -167,10 +167,9 @@
                                                           Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                           ItemsSource="{Binding ZeroTaxRates}"
                                                           materialDesign:HintAssist.Hint="零税率标识"
-                                                          
                                                           DisplayMemberPath="Value"
                                                           SelectedValuePath="Key"
-                                                          SelectedValue="{Binding ZeroTaxRateSelected}">
+                                                          SelectedValue="{Binding Path=InvoiceZeroTaxRateID,  Source={x:Static properties:Settings.Default}}">
                                                         <ComboBox.Resources>
                                                             <Style TargetType="ComboBox">
                                                                 <Style.Triggers>

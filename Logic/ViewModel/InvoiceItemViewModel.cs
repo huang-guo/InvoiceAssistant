@@ -140,8 +140,6 @@ namespace InvoiceAssistant.Logic.ViewModel
             {2,"不征收" },
             {3,"普通零税率" },
         });
-        [ObservableProperty]
-        private int zeroTaxRateSelected=3;
 
 
         [ObservableProperty]
@@ -261,7 +259,7 @@ namespace InvoiceAssistant.Logic.ViewModel
                                 Je = amount / (1 + taxRate),
                                 Se = amount * taxRate / (1 + taxRate),
 
-                                Lslbz = IsZeroTaxRate ? zeroTaxRateSelected.ToString() : "",
+                                Lslbz = IsZeroTaxRate ? Properties.Settings.Default.InvoiceZeroTaxRateID.ToString() : "",
                             };
                             if (count < 0)
                             {

@@ -166,5 +166,17 @@ namespace InvoiceAssistant.Properties {
                 this["InvoiceFullName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int InvoiceZeroTaxRateID {
+            get {
+                return ((int)(this["InvoiceZeroTaxRateID"]));
+            }
+            set {
+                this["InvoiceZeroTaxRateID"] = value;
+            }
+        }
     }
 }
