@@ -91,36 +91,36 @@
                                                     <ComboBox ItemsSource="{Binding StrColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="商品全名字段" DisplayMemberPath="ColumnName" 
                                           SelectedItem="{Binding ProductNameColumn}"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
                                                     <ComboBox ItemsSource="{Binding StrColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="单位字段" DisplayMemberPath="ColumnName"
                                           materialDesign:TextFieldAssist.HasClearButton="True" SelectedItem="{Binding UnitNameColumn}"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
                                                     <ComboBox ItemsSource="{Binding StrColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="型号字段" DisplayMemberPath="ColumnName"
                                           SelectedItem="{Binding ModelColumn}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
                                                     <ComboBox ItemsSource="{Binding DoubleColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="单价字段" DisplayMemberPath="ColumnName"
                                           SelectedItem="{Binding PriceColumn}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
                                                     <ComboBox ItemsSource="{Binding DoubleColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="金额字段" DisplayMemberPath="ColumnName"
                                           SelectedItem="{Binding AmountColumn}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
                                                     <ComboBox ItemsSource="{Binding DoubleColumns}" Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="数量字段" DisplayMemberPath="ColumnName"
                                           SelectedItem="{Binding CountColumn}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Margin="5">
+                                          Margin="15">
                                                     </ComboBox>
 
                                                 </WrapPanel>
@@ -130,37 +130,37 @@
                                             <ScrollViewer>
                                                 <WrapPanel>
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="购方名称"
-                                                     Margin="10"
+                                                     Margin="15"
                                                     materialDesign:TextFieldAssist.HasClearButton="True" Text="{Binding Buyer}" MaxLength="50" MaxWidth="150"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="购方税号"
-                                                    Margin="10"
+                                                    Margin="15"
                                                      materialDesign:TextFieldAssist.HasClearButton="True" Text="{Binding TaxID}" MaxLength="50" MaxWidth="150"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="购方地址电话"
-                                                    Margin="10"
+                                                    Margin="15"
                                                      materialDesign:TextFieldAssist.HasClearButton="True" Text="{Binding AddressPhone}" MaxLength="100" MaxWidth="200"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="购方银行账号"
-                                                    Margin="10"
+                                                    Margin="15"
                                                      materialDesign:TextFieldAssist.HasClearButton="True" Text="{Binding BankAccount}" MaxLength="100" MaxWidth="200"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="备注"
-                                                    Margin="10"
+                                                    Margin="15"
                                                      materialDesign:TextFieldAssist.HasClearButton="True" Text="{Binding Remarks}" MaxLength="100" MaxWidth="200"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="收款人"
-                                                    Margin="10" Text="{Binding Path=InvoicePayee,  Source={x:Static properties:Settings.Default}}" MaxLength="10" 
+                                                    Margin="15" Text="{Binding Path=InvoicePayee,  Source={x:Static properties:Settings.Default}}" MaxLength="10" 
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="复核人"
-                                                    Margin="10" Text="{Binding Path=InvoiceReviewer,  Source={x:Static properties:Settings.Default}}" MaxLength="10" 
+                                                    Margin="15" Text="{Binding Path=InvoiceReviewer,  Source={x:Static properties:Settings.Default}}" MaxLength="10" 
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="商品编码版本号"
-                                                    Margin="10" Text="{Binding Path=InvoiceVersion,  Source={x:Static properties:Settings.Default}}" MaxLength="5"
+                                                    Margin="15" Text="{Binding Path=InvoiceVersion,  Source={x:Static properties:Settings.Default}}" MaxLength="5"
                                                      InputMethod.IsInputMethodEnabled="False"
                                                      />
                                                     <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="税率  "
-                                                    Margin="10" Text="{Binding TaxRate}"
+                                                    Margin="15" Text="{Binding TaxRate}"
                                                      InputMethod.IsInputMethodEnabled="False"
                                                      />
                                                     <ComboBox IsEnabled="{Binding IsZeroTaxRate}" 
