@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\buding.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
     <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
@@ -53,6 +57,10 @@
   <ItemGroup>
     <Folder Include="Logic\Converter\" />
     <Folder Include="Logic\Servers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\buding.jpg" />
   </ItemGroup>
 
 </Project>
