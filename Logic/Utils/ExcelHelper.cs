@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InvoiceAssistant.Logic.Utils
 {
@@ -42,16 +44,17 @@ namespace InvoiceAssistant.Logic.Utils
                     UseHeaderRow = true,
                     // Gets or sets a callback to determine which row is the header row. 
                     // Only called when UseHeaderRow = true.
-                    ReadHeaderRow = (rowReader) => {
+                    ReadHeaderRow = (rowReader) =>
+                    {
                         for (int i = 0; i < rowReader.RowCount; i++)
                         {
-                            
+
                             int nullCount = 0;
                             for (int j = 0; j < rowReader.FieldCount; j++)
                             {
                                 if (rowReader.IsDBNull(j)) { nullCount++; }
                             }
-                            if (nullCount > rowReader.FieldCount-3)
+                            if (nullCount > rowReader.FieldCount - 3)
                             {
                                 rowReader.Read();
                             }
@@ -61,7 +64,20 @@ namespace InvoiceAssistant.Logic.Utils
                             }
                         }
                     },
+                    FilterRow = (rowReader) =>
+                    {
+                        int nullValue = 0;
+                        for (int i = 0; i < rowReader.FieldCount; i++)
+                        {
+                            var value = rowReader.GetValue(i);
 
+                            if (string.IsNullOrWhiteSpace(value?.ToString()))
+                            {
+                                nullValue++;
+                            }
+                        }
+                        return nullValue < rowReader.FieldCount/2;
+                    }
                 }
             });
             // The result of each spreadsheet is in result.Tables
