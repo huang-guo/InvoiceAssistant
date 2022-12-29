@@ -8,8 +8,11 @@
         xmlns:viewmodel="clr-namespace:InvoiceAssistant.Logic.ViewModel"
         xmlns:properties="clr-namespace:InvoiceAssistant.Properties"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
-        mc:Ignorable="d" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Closed="Window_Closed"
-        Title="发票助手" Height="800" Width="1400">
+        mc:Ignorable="d" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Closed="Window_Closed"
+        Title="发票助手"
+        Width="{Binding Path=MainWindowWidth,  Source={x:Static properties:Settings.Default}}"
+        Height="{Binding Path=MainWindowHeight,  Source={x:Static properties:Settings.Default}}" 
+        MinHeight="600" MinWidth="1000">
     <materialDesign:DialogHost x:Name="dialogHost" Identifier="root" >
         <Grid>
             <Grid.RowDefinitions>
