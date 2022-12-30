@@ -97,5 +97,13 @@ namespace InvoiceAssistant
             productInfoWindow.Show();
         }
 
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            DataGrid dataGrid=(DataGrid)sender;
+            foreach (var item in dataGrid.SelectedItems)
+            {
+                Debug.WriteLine(item);
+            }
+        }
     }
 }

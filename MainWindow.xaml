@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:InvoiceAssistant"  
+        xmlns:behaviours="clr-namespace:InvoiceAssistant.Ui.Behaviours"  
         xmlns:viewmodel="clr-namespace:InvoiceAssistant.Logic.ViewModel"
         xmlns:properties="clr-namespace:InvoiceAssistant.Properties"
         d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
@@ -75,7 +76,13 @@
                             </Grid.ColumnDefinitions>
                             <GroupBox Margin="5"  Header="文本信息">
                                 <DataGrid ItemsSource="{Binding ExcelData}"
-                                          CanUserAddRows="False">
+                                          CanUserAddRows="False" behaviours:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedRows}">
+
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="移动到新的发票" Command="{Binding NewInvoiceCommand}"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
                                 </DataGrid>
                             </GroupBox>
 

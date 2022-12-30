@@ -161,7 +161,41 @@ namespace InvoiceAssistant.Logic.ViewModel
             AmountColumn = doubleColumns?.FirstOrDefault((item) => item.ColumnName == Properties.Settings.Default.AmountColumnName);
             CountColumn = doubleColumns?.FirstOrDefault((item) => item.ColumnName == Properties.Settings.Default.CountColumnName);
         }
-
+        [ObservableProperty]
+        private ObservableCollection<DataRowView> selectedRows=new();
+        [RelayCommand]
+        private void NewInvoice()
+        {
+            var list = selectedRows.ToArray();
+            InvoiceItemViewModel invoiceItemViewModel = Clone();
+            foreach (var item in list)
+            {
+                invoiceItemViewModel.ExcelData.Rows.Add(item.Row.ItemArray);
+                excelData.Rows.Remove(item.Row);
+            }
+            WeakReferenceMessenger.Default.Send(new AddNewInvoiceMessage(invoiceItemViewModel));
+        }
+        /// <summary>
+        /// 复制一个新的InvoiceItemViewModel
+        /// </summary>
+        /// <returns></returns>
+        public InvoiceItemViewModel Clone()
+        {
+            return new InvoiceItemViewModel
+            {
+                ExcelData = excelData.Clone(),
+                Title = _title,
+                StrColumns=strColumns,
+                DoubleColumns=doubleColumns,
+                ProductNameColumn = productNameColumn,
+                UnitNameColumn = unitNameColumn,
+                ModelColumn = modelColumn,
+                PriceColumn = priceColumn,
+                AmountColumn = amountColumn,
+                TaxRate=taxRate,
+                CountColumn=countColumn
+            };
+        }
 
         /// <summary>
         /// 从excel文件中获取数据表

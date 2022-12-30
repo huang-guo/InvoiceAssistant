@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 
 namespace InvoiceAssistant.Logic.ViewModel
 {
-    public partial class MainViewModel : ObservableRecipient,IRecipient<TaxCodeRequestMessage>
+    public partial class MainViewModel : ObservableRecipient,IRecipient<AddNewInvoiceMessage>
     {
         [ObservableProperty]
         private ObservableCollection<InvoiceItemViewModel> _items=new();
@@ -87,6 +87,13 @@ namespace InvoiceAssistant.Logic.ViewModel
                 }
             }
         }
+
+        public void Receive(AddNewInvoiceMessage message)
+        {
+            Items.Add(message.Value);
+            SelecteItem = message.Value;
+        }
+
         /// <summary>
         /// 获取发票文件
         /// </summary>
@@ -115,14 +122,6 @@ namespace InvoiceAssistant.Logic.ViewModel
                 SelecteItem = result;
             }
         }
-        void IRecipient<TaxCodeRequestMessage>.Receive(TaxCodeRequestMessage message)
-        {
-            if (message.ProductName!=null)
-            {
-                InputTaxCodeViewModel inputTaxCodeViewModel = new(message.ProductName);
-                new InputTaxCodeWindow() { DataContext = inputTaxCodeViewModel }.ShowDialog();
-                message.Reply(inputTaxCodeViewModel.Result);
-            }
-        }
+       
     }
 }
