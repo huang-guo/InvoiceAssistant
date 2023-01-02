@@ -44,7 +44,7 @@ namespace InvoiceAssistant.Ui.EventListeners
         {
         }
 
-        private delegate void ChangeListAction(IList list, NotifyCollectionChangedEventArgs e, Converter<object, object> converter);
+        private delegate void ChangeListAction(IList list, NotifyCollectionChangedEventArgs e, Converter<object?, object?> converter);
 
         /// <summary>
         /// Starts synchronizing the lists.
@@ -86,7 +86,7 @@ namespace InvoiceAssistant.Ui.EventListeners
         /// </returns>
         public bool ReceiveWeakEvent(Type managerType, object sender, EventArgs e)
         {
-            HandleCollectionChanged(sender as IList, e as NotifyCollectionChangedEventArgs);
+            HandleCollectionChanged((IList)sender, (NotifyCollectionChangedEventArgs)e);
 
             return true;
         }
@@ -115,9 +115,9 @@ namespace InvoiceAssistant.Ui.EventListeners
             }
         }
 
-        private void AddItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object, object> converter)
+        private void AddItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object?, object?> converter)
         {
-            int itemCount = e.NewItems.Count;
+            int itemCount = e.NewItems?.Count??0;
 
             for (int i = 0; i < itemCount; i++)
             {
@@ -125,28 +125,28 @@ namespace InvoiceAssistant.Ui.EventListeners
 
                 if (insertionPoint > list.Count)
                 {
-                    list.Add(converter(e.NewItems[i]));
+                    list.Add(converter(e.NewItems?[i]));
                 }
                 else
                 {
-                    list.Insert(insertionPoint, converter(e.NewItems[i]));
+                    list.Insert(insertionPoint, converter(e.NewItems?[i]));
                 }
             }
         }
 
-        private object ConvertFromMasterToTarget(object masterListItem)
+        private object? ConvertFromMasterToTarget(object? masterListItem)
         {
             return _masterTargetConverter == null ? masterListItem : _masterTargetConverter.Convert(masterListItem);
         }
 
-        private object ConvertFromTargetToMaster(object targetListItem)
+        private object? ConvertFromTargetToMaster(object? targetListItem)
         {
             return _masterTargetConverter == null ? targetListItem : _masterTargetConverter.ConvertBack(targetListItem);
         }
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            IList sourceList = sender as IList;
+            IList sourceList = (IList)sender;
 
             switch (e.Action)
             {
@@ -163,14 +163,14 @@ namespace InvoiceAssistant.Ui.EventListeners
                     PerformActionOnAllLists(ReplaceItems, sourceList, e);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    UpdateListsFromSource(sender as IList);
+                    UpdateListsFromSource((IList)sender);
                     break;
                 default:
                     break;
             }
         }
 
-        private void MoveItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object, object> converter)
+        private void MoveItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object?, object?> converter)
         {
             RemoveItems(list, e, converter);
             AddItems(list, e, converter);
@@ -188,16 +188,16 @@ namespace InvoiceAssistant.Ui.EventListeners
             }
         }
 
-        private void PerformActionOnList(IList list, ChangeListAction action, NotifyCollectionChangedEventArgs collectionChangedArgs, Converter<object, object> converter)
+        private void PerformActionOnList(IList list, ChangeListAction action, NotifyCollectionChangedEventArgs collectionChangedArgs, Converter<object?, object?> converter)
         {
             StopListeningForChangeEvents(list);
             action(list, collectionChangedArgs, converter);
             ListenForChangeEvents(list);
         }
 
-        private void RemoveItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object, object> converter)
+        private void RemoveItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object?, object?> converter)
         {
-            int itemCount = e.OldItems.Count;
+            int itemCount = e.OldItems?.Count ?? 0;
 
             // for the number of items being removed, remove the item from the Old Starting Index
             // (this will cause following items to be shifted down to fill the hole).
@@ -207,13 +207,13 @@ namespace InvoiceAssistant.Ui.EventListeners
             }
         }
 
-        private void ReplaceItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object, object> converter)
+        private void ReplaceItems(IList list, NotifyCollectionChangedEventArgs e, Converter<object?, object?> converter)
         {
             RemoveItems(list, e, converter);
             AddItems(list, e, converter);
         }
 
-        private void SetListValuesFromSource(IList sourceList, IList targetList, Converter<object, object> converter)
+        private void SetListValuesFromSource(IList sourceList, IList targetList, Converter<object?, object?> converter)
         {
             StopListeningForChangeEvents(targetList);
 
@@ -261,7 +261,7 @@ namespace InvoiceAssistant.Ui.EventListeners
             /// </summary>
             /// <param name="masterListItem">The master list item.</param>
             /// <returns>The result of the conversion.</returns>
-            public object Convert(object masterListItem)
+            public object? Convert(object? masterListItem)
             {
                 return masterListItem;
             }
@@ -271,7 +271,7 @@ namespace InvoiceAssistant.Ui.EventListeners
             /// </summary>
             /// <param name="targetListItem">The target list item.</param>
             /// <returns>The result of the conversion.</returns>
-            public object ConvertBack(object targetListItem)
+            public object? ConvertBack(object? targetListItem)
             {
                 return targetListItem;
             }

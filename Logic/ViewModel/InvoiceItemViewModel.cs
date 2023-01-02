@@ -24,6 +24,9 @@ namespace InvoiceAssistant.Logic.ViewModel
 {
     public partial class InvoiceItemViewModel : ObservableValidator
     {
+        public InvoiceItemViewModel()
+        {
+        }
         [ObservableProperty]
         private string? _title;
 
@@ -35,6 +38,30 @@ namespace InvoiceAssistant.Logic.ViewModel
 
         [ObservableProperty]
         private DataTable excelData=new();
+
+        partial void OnExcelDataChanged(DataTable value)
+        {
+           
+            // 设置数据选择列
+            List<DataColumn> columns1 = new();
+            List<DataColumn> columns2 = new();
+            foreach (DataColumn column in excelData.Columns)
+            {
+                if (column.DataType == typeof(string))
+                {
+                    columns1.Add(column);
+                }
+                else if (column.DataType == typeof(double))
+                {
+                    columns2.Add(column);
+                }
+            }
+            StrColumns = new ReadOnlyCollection<DataColumn>(columns1);
+            DoubleColumns = new ReadOnlyCollection<DataColumn>(columns2);
+
+            InitColumns();
+
+        }
 
         [ObservableProperty]
         private ReadOnlyCollection<DataColumn>? strColumns;
@@ -181,20 +208,18 @@ namespace InvoiceAssistant.Logic.ViewModel
         /// <returns></returns>
         public InvoiceItemViewModel Clone()
         {
-            return new InvoiceItemViewModel
+            return new()
             {
                 ExcelData = excelData.Clone(),
-                Title = _title,
-                StrColumns=strColumns,
-                DoubleColumns=doubleColumns,
-                ProductNameColumn = productNameColumn,
-                UnitNameColumn = unitNameColumn,
-                ModelColumn = modelColumn,
-                PriceColumn = priceColumn,
-                AmountColumn = amountColumn,
-                TaxRate=taxRate,
-                CountColumn=countColumn
+                _title = _title,
+                taxRate=taxRate,
+                buyer=buyer,
+                taxID=taxID,
+                addressPhone=addressPhone,
+                bankAccount=bankAccount
             };
+
+
         }
 
         /// <summary>
@@ -206,23 +231,7 @@ namespace InvoiceAssistant.Logic.ViewModel
         {
             ExcelData = ExcelHelper.GetTable(filename);
 
-            // 设置数据选择列
-            List<DataColumn> columns1 = new();
-            List<DataColumn> columns2 = new();
-            foreach (DataColumn column in excelData.Columns)
-            {
-                if (column.DataType == typeof(string))
-                {
-                    columns1.Add(column);
-                }
-                else if (column.DataType == typeof(double))
-                {
-                    columns2.Add(column);
-                }
-            }
-            StrColumns = new ReadOnlyCollection<DataColumn>(columns1);
-            DoubleColumns = new ReadOnlyCollection<DataColumn>(columns2);
-            InitColumns();
+           
         }
 
         public KpFpxxFpsjFP? GetInvoice()

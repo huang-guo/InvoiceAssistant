@@ -76,7 +76,8 @@
                             </Grid.ColumnDefinitions>
                             <GroupBox Margin="5"  Header="文本信息">
                                 <DataGrid ItemsSource="{Binding ExcelData}"
-                                          CanUserAddRows="False" behaviours:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedRows}">
+                                          CanUserAddRows="False" 
+                                          behaviours:MultiSelectorBehaviours.SynchronizedSelectedItems="{Binding SelectedRows}">
 
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>

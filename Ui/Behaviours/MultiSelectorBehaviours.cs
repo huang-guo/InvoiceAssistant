@@ -8,13 +8,14 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows;
 using InvoiceAssistant.Ui.EventListeners;
+using System.Diagnostics;
 
 namespace InvoiceAssistant.Ui.Behaviours
 {
     class MultiSelectorBehaviours
     {
         public static readonly DependencyProperty SynchronizedSelectedItems = DependencyProperty.RegisterAttached(
-           "SynchronizedSelectedItems", typeof(IList), typeof(MultiSelectorBehaviours), new PropertyMetadata(null, OnSynchronizedSelectedItemsChanged));
+           "SynchronizedSelectedItems", typeof(IList), typeof(MultiSelectorBehaviours), new PropertyMetadata(default(object), OnSynchronizedSelectedItemsChanged));
 
         private static readonly DependencyProperty SynchronizationManagerProperty = DependencyProperty.RegisterAttached(
             "SynchronizationManager", typeof(SynchronizationManager), typeof(MultiSelectorBehaviours), new PropertyMetadata(null));
@@ -44,7 +45,7 @@ namespace InvoiceAssistant.Ui.Behaviours
             return (SynchronizationManager)dependencyObject.GetValue(SynchronizationManagerProperty);
         }
 
-        private static void SetSynchronizationManager(DependencyObject dependencyObject, SynchronizationManager value)
+        private static void SetSynchronizationManager(DependencyObject dependencyObject, SynchronizationManager? value)
         {
             dependencyObject.SetValue(SynchronizationManagerProperty, value);
         }
@@ -59,11 +60,9 @@ namespace InvoiceAssistant.Ui.Behaviours
                 SetSynchronizationManager(dependencyObject, null);
             }
 
-            IList list = e.NewValue as IList;
-            Selector selector = dependencyObject as Selector;
 
             // check that this property is an IList, and that it is being set on a ListBox
-            if (list != null && selector != null)
+            if (e.NewValue is IList && dependencyObject is Selector selector)
             {
                 SynchronizationManager synchronizer = GetSynchronizationManager(dependencyObject);
                 if (synchronizer == null)
@@ -82,7 +81,7 @@ namespace InvoiceAssistant.Ui.Behaviours
         private class SynchronizationManager
         {
             private readonly Selector _multiSelector;
-            private TwoListSynchronizer _synchronizer;
+            private TwoListSynchronizer? _synchronizer;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="SynchronizationManager"/> class.
@@ -112,22 +111,20 @@ namespace InvoiceAssistant.Ui.Behaviours
             /// </summary>
             public void StopSynchronizing()
             {
-                _synchronizer.StopSynchronizing();
+                _synchronizer?.StopSynchronizing();
             }
 
             public static IList GetSelectedItemsCollection(Selector selector)
             {
                 if (selector is MultiSelector)
                 {
-                    return (selector as MultiSelector).SelectedItems;
-                }
-                else if (selector is ListBox)
-                {
-                    return (selector as ListBox).SelectedItems;
+                    return ((MultiSelector)selector).SelectedItems;
                 }
                 else
                 {
-                    throw new InvalidOperationException("Target object has no SelectedItems property to bind.");
+                    return selector is ListBox box
+                        ? box.SelectedItems
+                        : throw new InvalidOperationException("Target object has no SelectedItems property to bind.");
                 }
             }
 

@@ -1,0 +1,12 @@
+﻿<TabItem x:Class="InvoiceAssistant.Ui.MyControls.InvoiceItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InvoiceAssistant.Ui.MyControls" 
+         xmlns:viewmodel="clr-namespace:InvoiceAssistant.Logic.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:InvoiceItemViewModel}"
+         mc:Ignorable="d" Header="111">
+    <Grid>
+        <TextBlock Text="1112"/>
+    </Grid>
+</TabItem>
